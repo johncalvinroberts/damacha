@@ -1,0 +1,28 @@
+{
+  "name": "sssrpbp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "parcel build src/index.html",
+    "start": "parcel serve src/index.html",
+    "add-track": "node ./scripts/add-track.js"
+  },
+  "dependencies": {
+    "date-fns": "^2.11.1",
+    "lodash.kebabcase": "^4.1.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-helmet": "^5.2.1",
+    "react-router-dom": "^6.0.0-alpha.2",
+    "theme-ui": "^0.3.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-wcl-frontend": "^1.0.11",
+    "is-url": "^1.2.4",
+    "parcel": "latest",
+    "prettier": "^2.0.2",
+    "prompts": "^2.3.2"
+  }
+}

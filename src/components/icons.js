@@ -30,7 +30,7 @@ export const Button = ({ title, children, ...props }) => (
       ':focus': {
         outline: 0,
         boxShadow: '0 0 0 2px',
-        color: 'pink',
+        color: 'primary',
       },
     }}
   >

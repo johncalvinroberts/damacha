@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx, Styled, useColorMode } from 'theme-ui';
 import { Global } from '@emotion/core';
+import { Link } from 'react-router-dom';
 import { modes } from './theme';
 import SpecialButton from './SpecialButton';
 import Controls from './Controls';
@@ -39,9 +40,10 @@ const Container = ({ children }) => {
           p: 3,
         }}
       >
-        <div sx={{ display: 'flex', alignItems: 'center' }}>
+        <div sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
           <Styled.a
-            href="/"
+            to="/"
+            as={Link}
             sx={{
               variant: 'styles.navlink',
               fontWeight: 'bold',
@@ -54,16 +56,18 @@ const Container = ({ children }) => {
           <Styled.p sx={{ marginLeft: 2 }}>Lost tracks</Styled.p>
           <div sx={{ mx: 2 }} />
           <SpecialButton title="Change Color Mode" onClick={cycleMode} />
-          <div sx={{ my: [2, 4] }}>
-            <Controls />
+          <div sx={{ flex: '0 0 100%' }}>
+            <div sx={{ my: [2, 4] }}>
+              <Controls />
+            </div>
+            <Progress />
           </div>
-          <Progress />
         </div>
       </header>
       <main
         sx={{
-          p: 3,
           maxWidth: 768,
+          minHeight: 'calc(100vh - 40px)',
         }}
       >
         {children}
@@ -71,7 +75,8 @@ const Container = ({ children }) => {
       <footer
         sx={{
           px: 3,
-          py: 4,
+          py: 2,
+          height: '40px',
         }}
       >
         © {new Date().getFullYear()}

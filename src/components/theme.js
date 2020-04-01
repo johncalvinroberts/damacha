@@ -1,7 +1,7 @@
 export const modes = ['dark', 'orange', 'green', 'cyan', 'pink', 'lite'];
 
 export default {
-  initialColorMode: 'dark',
+  initialColorMode: 'lite',
   useCustomProperties: true,
   fonts: {
     body: '"Roboto Mono", Menlo, monospace',
@@ -33,12 +33,6 @@ export default {
         background: 'black',
         primary: 'hsl(40, 100%, 80%)',
         muted: 'hsla(40, 100%, 80%, .0625)',
-      },
-      green: {
-        text: 'hsl(130, 100%, 60%)',
-        background: 'black',
-        primary: 'hsl(130, 100%, 80%)',
-        muted: 'hsla(130, 100%, 80%, .0625)',
       },
       cyan: {
         text: 'hsl(160, 100%, 60%)',

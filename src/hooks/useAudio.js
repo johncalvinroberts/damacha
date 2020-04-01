@@ -1,10 +1,14 @@
 import { useEffect, useState, useCallback } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export default (tracks = []) => {
   const [audio, setAudio] = useState(null);
   const [time, setTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [index, setIndex] = useState(0);
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const playing = audio && !audio.paused;
   const progress = time / duration || 0;
@@ -35,9 +39,9 @@ export default (tracks = []) => {
     audio.src = track.url;
     setIndex(n);
     audio.play();
-    // if (globalHistory.location.pathname !== '/') {
-    //   navigate('/' + track.name)
-    // }
+    if (location.pathname !== '/') {
+      navigate(`/${track.slug}`);
+    }
   };
 
   const next = useCallback(() => {
@@ -46,10 +50,10 @@ export default (tracks = []) => {
     audio.src = track.url;
     setIndex(n);
     audio.play();
-    // if (globalHistory.location.pathname !== '/') {
-    //   navigate('/' + track.name)
-    // }
-  }, [audio, index, tracks]);
+    if (location.pathname !== '/') {
+      navigate(`/${track.name}`);
+    }
+  }, [audio, index, location.pathname, navigate, tracks]);
 
   const seek = (e) => {
     const n = e.clientX - e.target.offsetLeft;
@@ -90,16 +94,13 @@ export default (tracks = []) => {
   }, [audio, index, next]);
 
   useEffect(() => {
-    const { pathname } = window.location;
+    const { pathname } = location;
     if (pathname === '/') return;
-    const name = pathname.replace(/^\//, '');
-    const index = tracks.findIndex((t) => t.name === name);
+    const slug = pathname.replace(/^\//, '');
+    const index = tracks.findIndex((t) => t.slug === slug);
     if (index < 0) return;
     setIndex(index);
-  }, [tracks]);
-
-  const title =
-    audio && audio.src ? tracks[index].title : 'beats created in under an hour';
+  }, [location, tracks]);
 
   return {
     audio,
@@ -113,6 +114,5 @@ export default (tracks = []) => {
     next,
     seek,
     progress,
-    title,
   };
 };

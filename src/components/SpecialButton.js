@@ -50,7 +50,7 @@ export const SpinnerBase = (props) => (
   />
 );
 
-const SpinnerOuter = ({ children }) => (
+export const SpinnerOuter = ({ children }) => (
   <div
     css={css`
       border-radius: 50%;
@@ -66,7 +66,7 @@ const SpinnerOuter = ({ children }) => (
   </div>
 );
 
-const SpinnerInner = () => (
+export const SpinnerInner = () => (
   <div
     css={css`
       background-image: linear-gradient(

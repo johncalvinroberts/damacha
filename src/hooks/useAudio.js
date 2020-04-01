@@ -90,7 +90,7 @@ export default (tracks = []) => {
   }, [audio, index, next]);
 
   useEffect(() => {
-    const { pathname } = window.location.pathname;
+    const { pathname } = window.location;
     if (pathname === '/') return;
     const name = pathname.replace(/^\//, '');
     const index = tracks.findIndex((t) => t.name === name);

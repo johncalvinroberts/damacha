@@ -91,7 +91,14 @@ export const SpinnerInner = () => (
 
 const SpecialButton = (props) => {
   return (
-    <Button {...props}>
+    <Button
+      {...props}
+      css={css`
+        :focus {
+          color: transparent;
+        }
+      `}
+    >
       <SpinnerOuter>
         <SpinnerInner />
       </SpinnerOuter>

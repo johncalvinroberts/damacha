@@ -6,8 +6,9 @@ import Container from './Container';
 import Beats from './Beats';
 import Tracks from './Tracks';
 import Track from './Track';
+import NotFound from './NotFound';
 
-const App = () => {
+export default () => {
   return (
     <Router>
       <ThemeProvider theme={theme}>
@@ -16,6 +17,7 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Tracks />} />
               <Route path="/:slug" element={<Track />} />
+              <Route path="/not-found" element={<NotFound />} />
             </Routes>
           </Container>
         </Beats>
@@ -23,5 +25,3 @@ const App = () => {
     </Router>
   );
 };
-
-export default App;

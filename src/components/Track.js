@@ -19,7 +19,7 @@ export default () => {
     return tracks[trackIndex];
   }, [slug, tracks]);
 
-  const { dateUploaded, url, trackName } = track || {};
+  const { dateUploaded, url, trackName, remark } = track || {};
   useHead({
     title: trackName,
     meta: {
@@ -44,6 +44,9 @@ export default () => {
         >
           {track.id}. {trackName}
         </Styled.h1>
+        {remark && (
+          <div sx={{ mb: 4 }} dangerouslySetInnerHTML={{ __html: remark }} />
+        )}
         <div>
           Date Uploaded: {format(new Date(dateUploaded), 'EEEE MMM do, yyyy')}
         </div>

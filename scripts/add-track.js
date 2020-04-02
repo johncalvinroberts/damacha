@@ -36,12 +36,17 @@ const generateId = (index) => {
       name: 'trackName',
       message: 'Please enter Track Name',
     },
+    {
+      type: 'text',
+      name: 'remark',
+      message: 'Add a remark',
+    },
   ]);
 
-  const { trackName, url } = response;
+  const { trackName, url, remark } = response;
   const slug = encodeURIComponent(hyphenate(trackName));
   const id = await generateId(tracks.length);
-  const track = { trackName, slug, url, dateUploaded, id };
+  const track = { trackName, slug, url, dateUploaded, id, remark };
   console.log(JSON.stringify(track, null, 2)); //eslint-disable-line
   const { confirm } = await prompts({
     type: 'confirm',

@@ -10,6 +10,7 @@
     "trackName": "when downstate was here",
     "slug": "when-downstate-was-here",
     "url": "https://damacha.sfo2.digitaloceanspaces.com/fuckudownstatefg22.mp3",
+    "remark": "I made this when downstate was living at my house for a few weeks in 2017-ish. Now, the name also makes me think about the times when downstate was indeed here, and we could chill all the time. Those were probably the best days in China.",
     "dateUploaded": "2020-03-30",
     "id": "2-9da1"
   },
@@ -17,6 +18,7 @@
     "trackName": "vibrant.一千五",
     "slug": "vibrant-%E4%B8%80%E5%8D%83%E4%BA%94",
     "url": "https://damacha.sfo2.digitaloceanspaces.com/viberantiqianwu2.mp3",
+    "remark": "<strong>Uncle: </strong> I'm begging you, Prince Zuko. It's time for you to look inward and begin asking yourself the big questions. Who are you and what do you want?",
     "dateUploaded": "2020-03-30",
     "id": "3-5713"
   },
@@ -26,5 +28,13 @@
     "url": "https://damacha.sfo2.digitaloceanspaces.com/4.%20homeproj4_everything%20perfect.mp3",
     "dateUploaded": "2020-04-01",
     "id": "4-9342"
+  },
+  {
+    "trackName": "silk4 - chanel noir",
+    "slug": "silk-4-chanel-noir",
+    "url": "https://damacha.sfo2.digitaloceanspaces.com/silk4.mp3",
+    "dateUploaded": "2020-04-02",
+    "id": "5-7432",
+    "remark": ""
   }
 ]

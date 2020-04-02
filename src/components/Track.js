@@ -65,6 +65,7 @@ export default () => {
               border: 0,
               display: 'inline-flex',
               alignItems: 'center',
+              cursor: 'pointer',
               p: 2,
               m: 0,
               mr: 3,
@@ -75,7 +76,12 @@ export default () => {
             <Play sx={{ mr: 2 }} />
             Play Track
           </button>
-          <Styled.a download href={url}>
+          <Styled.a
+            download
+            target="_blank"
+            rel="noopener noreferrer"
+            href={url}
+          >
             Download MP3
           </Styled.a>
         </div>

@@ -80,7 +80,7 @@ const TrackListItem = forwardRef(({ track, active }, ref) => {
             },
           }}
         >
-          {format(new Date(track.dateUploaded), 'EEEE MMM do, yyyy')}
+          {format(new Date(), 'EEEE MMM do, yyyy')}
         </Link>
       </div>
     </li>

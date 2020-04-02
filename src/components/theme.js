@@ -30,13 +30,13 @@ export default {
       },
       orange: {
         text: 'hsl(40, 100%, 60%)',
-        background: 'hsl(182, 71%, 48%)',
+        background: 'hsl(207, 100%, 43%)',
         primary: 'hsl(40, 100%, 80%)',
         muted: 'hsla(40, 100%, 80%, .0625)',
       },
       cyan: {
         text: 'hsl(160, 100%, 60%)',
-        background: 'black',
+        background: 'hsl(0, 0%, 9%)',
         primary: 'hsl(160, 100%, 80%)',
         muted: 'hsla(160, 100%, 80%, .0625)',
       },

@@ -1,5 +1,7 @@
+import { useColorMode } from 'theme-ui';
 import { useEffect, useState, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { modes } from '../components/theme';
 
 export default (tracks = []) => {
   const [audio, setAudio] = useState(null);
@@ -12,6 +14,17 @@ export default (tracks = []) => {
 
   const playing = audio && !audio.paused;
   const progress = time / duration || 0;
+
+  const [mode, setMode] = useColorMode();
+  const nextMode = useCallback(() => {
+    const n = (modes.indexOf(mode) + 1) % modes.length;
+    setMode(modes[n]);
+  }, [mode, setMode]);
+
+  const prevMode = useCallback(() => {
+    const n = (modes.indexOf(mode) - 1) % modes.length;
+    setMode(modes[n]);
+  }, [mode, setMode]);
 
   const playPause = (track = tracks[index]) => {
     if (track.url === audio.src) {
@@ -39,6 +52,7 @@ export default (tracks = []) => {
     audio.src = track.url;
     setIndex(n);
     audio.play();
+    prevMode();
     if (location.pathname !== '/') {
       navigate(`/${track.slug}`);
     }
@@ -50,10 +64,11 @@ export default (tracks = []) => {
     audio.src = track.url;
     setIndex(n);
     audio.play();
+    nextMode();
     if (location.pathname !== '/') {
       navigate(`/${track.name}`);
     }
-  }, [audio, index, location.pathname, navigate, tracks]);
+  }, [audio, index, location.pathname, navigate, nextMode, tracks]);
 
   const seek = (e) => {
     const n = e.clientX - e.target.offsetLeft;

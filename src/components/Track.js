@@ -5,6 +5,7 @@ import { jsx, Styled } from 'theme-ui';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useBeats } from './Beats';
 import { Play } from './icons';
+import { useHead } from '../hooks';
 
 export default () => {
   const { slug } = useParams();
@@ -19,6 +20,14 @@ export default () => {
   }, [slug, tracks]);
 
   const { dateUploaded, url, trackName } = track || {};
+  useHead({
+    title: trackName,
+    meta: {
+      description: {
+        content: 'A musical track by damacha with a free download',
+      },
+    },
+  });
 
   if (!track) {
     navigate('/not-found');

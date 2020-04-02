@@ -1,8 +1,8 @@
-export const modes = ['dark', 'orange', 'green', 'cyan', 'pink', 'lite'];
+export const modes = ['default', 'orange', 'green', 'cyan', 'pink', 'lite'];
 
 export default {
-  initialColorMode: 'lite',
   useCustomProperties: true,
+  initialColorMode: 'lite',
   fonts: {
     body: '"Roboto Mono", Menlo, monospace',
     heading: '"Roboto Mono", Menlo, monospace',
@@ -18,7 +18,7 @@ export default {
   },
   colors: {
     text: 'white',
-    background: 'black',
+    background: '#3e3240',
     primary: 'hsl(180, 100%, 60%)',
     muted: 'hsla(220, 100%, 80%, .0625)',
     modes: {
@@ -30,7 +30,7 @@ export default {
       },
       orange: {
         text: 'hsl(40, 100%, 60%)',
-        background: 'black',
+        background: 'hsl(182, 71%, 48%)',
         primary: 'hsl(40, 100%, 80%)',
         muted: 'hsla(40, 100%, 80%, .0625)',
       },
@@ -42,7 +42,7 @@ export default {
       },
       pink: {
         text: 'hsl(340, 100%, 60%)',
-        background: 'black',
+        background: 'hsl(238, 32%, 14%)',
         primary: 'hsl(340, 100%, 80%)',
         muted: 'hsla(340, 100%, 80%, .0625)',
       },

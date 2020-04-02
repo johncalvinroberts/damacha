@@ -3,7 +3,9 @@ import { forwardRef, useRef, useEffect } from 'react';
 import { jsx } from 'theme-ui';
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
+import hhmmss from 'hhmmss';
 import { useBeats } from './Beats';
+import { useHead } from '../hooks';
 
 /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -88,8 +90,15 @@ const TrackListItem = forwardRef(({ track, active }, ref) => {
 /* eslint-enable jsx-a11y/no-noninteractive-element-to-interactive-role */
 
 export default () => {
-  const { tracks, index: activeIndex } = useBeats();
+  const { tracks, index: activeIndex, time, playing } = useBeats();
   const activeItem = useRef(null);
+
+  useHead({
+    title: playing ? hhmmss(time) : 'damacha',
+    meta: {
+      description: { content: 'A bunch of unreleased damacha tracks' },
+    },
+  });
   useEffect(() => {
     if (!activeItem.current) return;
     const el = activeItem.current;

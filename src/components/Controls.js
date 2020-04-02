@@ -17,7 +17,7 @@ export default () => {
         <Previous />
       </Button>
       <div sx={{ mx: 2 }} />
-      <Button title="Play/Pause" size={48} onClick={(e) => playPause()}>
+      <Button title="Play/Pause" size={48} onClick={() => playPause()}>
         {playing ? <Pause size={40} /> : <Play size={40} />}
       </Button>
       <div sx={{ mx: 2 }} />

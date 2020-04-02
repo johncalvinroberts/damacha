@@ -1,7 +1,9 @@
 /** @jsx jsx */
 import { jsx, Styled } from 'theme-ui';
+import { useHead } from '../hooks';
 
 export default () => {
+  useHead({ title: '404 This page does not exist' });
   return (
     <div
       sx={{
@@ -17,7 +19,7 @@ export default () => {
             mb: 2,
           }}
         >
-          Not Found
+          404 Not Found
         </Styled.h1>
         <Styled.p>
           The track you are seeking has been removed, maybe it was never here at

@@ -51,9 +51,8 @@ const Container = ({ children }) => {
               color: 'primary', // picks up value from `theme.colors.primary`
             }}
           >
-            DAMACHA
+            damacha
           </Styled.a>
-          <Styled.p sx={{ marginLeft: 2 }}>Lost tracks</Styled.p>
           <div sx={{ mx: 2 }} />
           <SpecialButton title="Change Color Mode" onClick={cycleMode} />
           <div sx={{ flex: '0 0 100%' }}>

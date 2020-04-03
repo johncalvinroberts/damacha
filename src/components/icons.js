@@ -20,7 +20,7 @@ export const Button = ({ title, children, ...props }) => (
       appearance: 'none',
       color: 'inherit',
       bg: 'transparent',
-      p: 0,
+      p: 1,
       m: 0,
       fontFamily: 'inherit',
       fontSize: 'inherit',

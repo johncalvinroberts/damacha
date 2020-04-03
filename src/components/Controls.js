@@ -13,15 +13,23 @@ export default () => {
         alignItems: 'center',
       }}
     >
-      <Button title="Previous" onClick={previous}>
+      <Button
+        title="Previous"
+        onClick={previous}
+        sx={{ width: 32, height: 32 }}
+      >
         <Previous />
       </Button>
       <div sx={{ mx: 2 }} />
       <Button title="Play/Pause" size={48} onClick={() => playPause()}>
-        {playing ? <Pause size={40} /> : <Play size={40} />}
+        {playing ? (
+          <Pause sx={{ width: 40, height: 40 }} />
+        ) : (
+          <Play sx={{ width: 40, height: 40 }} />
+        )}
       </Button>
       <div sx={{ mx: 2 }} />
-      <Button title="Next" onClick={next}>
+      <Button title="Next" onClick={next} sx={{ width: 32, height: 32 }}>
         <Next />
       </Button>
     </div>

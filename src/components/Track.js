@@ -45,7 +45,7 @@ export default () => {
           {track.id}. {trackName}
         </Styled.h1>
         {remark && (
-          <div sx={{ mb: 4 }} dangerouslySetInnerHTML={{ __html: remark }} />
+          <div sx={{ mb: 4 }} dangerouslySetInnerHTML={{ __html: remark }} /> //eslint-disable-line
         )}
         <div>
           Date Uploaded: {format(new Date(dateUploaded), 'EEEE MMM do, yyyy')}

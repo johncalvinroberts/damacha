@@ -96,7 +96,17 @@ export default () => {
   useHead({
     title: playing ? hhmmss(time) : 'damacha',
     meta: {
-      description: { content: 'A bunch of unreleased damacha tracks' },
+      description: {
+        content: 'Unreleased garbage from the damacha vault, old and new',
+      },
+      'og:title': { content: 'unreleased damacha beats' },
+      'twitter:title': { content: 'unreleased damacha beats' },
+      'twitter:text:title': {
+        content: 'unreleased damacha beats',
+      },
+      'twitter:description': {
+        content: 'Unreleased garbage from the damacha vault, old and new',
+      },
     },
   });
   useEffect(() => {

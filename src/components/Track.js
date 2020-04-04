@@ -26,6 +26,14 @@ export default () => {
       description: {
         content: 'A musical track by damacha with a free download',
       },
+      'og:title': { content: 'damacha unreleased track' },
+      'twitter:title': { content: 'damacha unreleased track' },
+      'twitter:text:title': {
+        content: 'a damacha vault unreleased garbage track',
+      },
+      'twitter:description': {
+        content: 'a damacha vault unreleased garbage track',
+      },
     },
   });
 

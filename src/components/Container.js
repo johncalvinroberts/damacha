@@ -82,7 +82,7 @@ const Container = ({ children }) => {
       >
         <span>© {new Date().getFullYear()}</span>
         <Styled.a
-          href="spotify:artist:0SNdS7f5RgPafbSwBraRKD"
+          href="https://open.spotify.com/artist/0SNdS7f5RgPafbSwBraRKD?si=BGPOju1dQuG6qUpK95iCOA"
           target="_blank"
           rel="noopener noreferrer"
           sx={{ pl: 1 }}

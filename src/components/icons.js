@@ -32,6 +32,9 @@ export const Button = ({ title, children, ...props }) => (
         boxShadow: '0 0 0 2px',
         color: 'primary',
       },
+      '&:hover': {
+        bg: 'muted',
+      },
     }}
   >
     {children}

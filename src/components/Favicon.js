@@ -24,25 +24,24 @@ function useInterval(callback, delay) {
 
 function useWickedFavIcon() {
   const letters = [
-    ...'✨💅✨♻️✨🦜✨🍄✨☄️✨💫✨🐱✨💆🏾‍♂️☘️☘️🍀🌿🌳🌲🐿🌲🌲🌱🍃🎋🌲🌸🌸🌼🌺🥀💐🌕🌖🌗🌘🌑🌒🌓🌔🌎🌍🌏🌔🌓🌒🌑🌘🌗🌖🌕',
+    ...'✨💅✨♻️✨🦜✨🍄✨☄️✨💫✨🐱✨💆☘️☘️🍀🌿🌳🌲🐿🌲🌲🌱🍃🎋🌲🌸🌸🌼🌺🥀💐🌕🌖🌗🌘🌑🌒🌓🌔🌎🌍🌏🌔🌓🌒🌑🌘🌗🌖🌕',
   ];
   const [index, setIndex] = useState(0);
   const canvasRef = useRef(0);
   const [mode] = useColorMode();
 
-  const color =
-    mode === 'default'
-      ? theme.colors.background
-      : theme.colors.modes[mode].background;
+  const colorMode =
+    mode === 'default' ? theme.colors : theme.colors.modes[mode];
+  const { text, background } = colorMode;
 
   useInterval(() => {
     setIndex(index >= letters.length - 1 ? 0 : index + 1);
     const letter = letters[index];
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
-    ctx.fillStyle = color;
+    ctx.fillStyle = background;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = color;
+    ctx.fillStyle = text;
     ctx.font = `310px monospace`;
     ctx.fillText(letter, 10, canvas.height - 10);
     const data = canvas.toDataURL('image/png');
@@ -50,7 +49,7 @@ function useWickedFavIcon() {
     const link = document.querySelector("link[rel*='icon']");
     link.type = 'image/x-icon';
     link.href = data;
-  }, 500);
+  }, 1000);
   return { letter: letters[index], index, canvasRef };
 }
 

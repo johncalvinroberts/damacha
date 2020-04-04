@@ -76,9 +76,27 @@ const Container = ({ children }) => {
           px: 3,
           py: 2,
           height: '40px',
+          display: 'flex',
+          justifyContent: 'flex-start',
         }}
       >
-        © {new Date().getFullYear()}
+        <span>© {new Date().getFullYear()}</span>
+        <Styled.a
+          href="spotify:artist:0SNdS7f5RgPafbSwBraRKD"
+          target="_blank"
+          rel="noopener noreferrer"
+          sx={{ pl: 1 }}
+        >
+          spotify
+        </Styled.a>
+        <Styled.a
+          href="https://www.instagram.com/omg_damacha/"
+          target="_blank"
+          rel="noopener noreferrer"
+          sx={{ pl: 1 }}
+        >
+          instagram
+        </Styled.a>
       </footer>
     </Styled.root>
   );

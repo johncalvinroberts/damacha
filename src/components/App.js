@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import theme from './theme';
 import Container from './Container';
 import Beats from './Beats';
+import Favicon from './Favicon';
 import Tracks from './Tracks';
 import Track from './Track';
 import NotFound from './NotFound';
@@ -12,6 +13,7 @@ export default () => {
   return (
     <Router>
       <ThemeProvider theme={theme}>
+        <Favicon />
         <Beats>
           <Container>
             <Routes>

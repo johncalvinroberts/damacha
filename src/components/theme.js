@@ -1,4 +1,4 @@
-export const modes = ['default', 'orange', 'green', 'cyan', 'pink', 'lite'];
+export const modes = ['default', 'orange', 'cyan', 'pink', 'lite'];
 
 export default {
   useCustomProperties: true,

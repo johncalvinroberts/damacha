@@ -69,5 +69,13 @@
     "dateUploaded": "2020-04-29",
     "id": "9-b4ca",
     "remark": "Made in 2020. Some recordings from 2016ish. First track I encoded using <a href=\"https://pprmnt.cc/\">pprmnt.</a>"
+  },
+  {
+    "trackName": "the west face",
+    "slug": "the-west-face",
+    "url": "https://damacha.sfo2.digitaloceanspaces.com/the%20west%20face%20(1).mp3",
+    "dateUploaded": "2020-05-02",
+    "id": "10-254b",
+    "remark": ""
   }
 ]

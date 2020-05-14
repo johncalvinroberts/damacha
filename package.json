@@ -29,7 +29,7 @@
     "eslint-config-wcl-frontend": "^1.0.11",
     "is-url": "^1.2.4",
     "parcel": "latest",
-    "prettier": "^2.0.2",
+    "prettier": "^2.0.5",
     "prompts": "^2.3.2"
   },
   "reactSnap": {

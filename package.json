@@ -8,7 +8,8 @@
     "build": "parcel build src/index.html",
     "postbuild": "react-snap",
     "start": "parcel serve src/index.html",
-    "add-track": "node ./scripts/add-track.js"
+    "add-track": "node ./scripts/add-track.js",
+    "lint": "eslint . --ignore-path .gitignore"
   },
   "dependencies": {
     "date-fns": "^2.13.0",

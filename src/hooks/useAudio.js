@@ -1,6 +1,6 @@
 import { useColorMode } from 'theme-ui';
 import { useEffect, useState, useCallback } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'wouter';
 import { modes } from '../components/theme';
 
 export default (tracks = []) => {
@@ -9,8 +9,7 @@ export default (tracks = []) => {
   const [duration, setDuration] = useState(0);
   const [index, setIndex] = useState(0);
 
-  const location = useLocation();
-  const navigate = useNavigate();
+  const [location, setLocation] = useLocation();
 
   const playing = audio && !audio.paused;
   const progress = time / duration || 0;
@@ -54,7 +53,7 @@ export default (tracks = []) => {
     audio.play();
     prevMode();
     if (location.pathname !== '/') {
-      navigate(`/${track.slug}`);
+      setLocation(`/${track.slug}`);
     }
   };
 
@@ -66,9 +65,9 @@ export default (tracks = []) => {
     audio.play();
     nextMode();
     if (location.pathname !== '/') {
-      navigate(`/${track.name}`);
+      setLocation(`/${track.slug}`);
     }
-  }, [audio, index, location.pathname, navigate, nextMode, tracks]);
+  }, [audio, index, location.pathname, nextMode, setLocation, tracks]);
 
   const seek = (e) => {
     const n = e.clientX - e.target.offsetLeft;
@@ -109,9 +108,8 @@ export default (tracks = []) => {
   }, [audio, index, next]);
 
   useEffect(() => {
-    const { pathname } = location;
-    if (pathname === '/') return;
-    const slug = pathname.replace(/^\//, '');
+    if (location === '/') return;
+    const slug = location.replace(/^\//, '');
     const index = tracks.findIndex((t) => t.slug === slug);
     if (index < 0) return;
     setIndex(index);

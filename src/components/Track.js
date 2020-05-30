@@ -2,14 +2,15 @@
 import { useMemo } from 'react';
 import { format } from 'date-fns';
 import { jsx, Styled } from 'theme-ui';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useRoute, useLocation } from 'wouter';
 import { useBeats } from './Beats';
 import { Play } from './icons';
 import { useHead } from '../hooks';
 
 export default () => {
-  const { slug } = useParams();
-  const navigate = useNavigate();
+  const [, params] = useRoute('/:slug');
+  const { slug } = params;
+  const [location, setLocation] = useLocation();
 
   const { tracks, playPause } = useBeats();
 
@@ -37,9 +38,13 @@ export default () => {
     },
   });
 
-  if (!track) {
-    navigate('/not-found');
+  if (!track && location !== '/not-found') {
+    setLocation('/not-found');
     return <div>Redirecting...you are lost.</div>;
+  }
+
+  if (location === '/not-found') {
+    return null;
   }
 
   return (

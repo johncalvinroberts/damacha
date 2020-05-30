@@ -1,6 +1,6 @@
 import React from 'react';
 import { ThemeProvider } from 'theme-ui';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Route } from 'wouter';
 import theme from './theme';
 import Container from './Container';
 import Beats from './Beats';
@@ -11,19 +11,21 @@ import NotFound from './NotFound';
 
 export default () => {
   return (
-    <Router>
-      <ThemeProvider theme={theme}>
-        <Favicon />
-        <Beats>
-          <Container>
-            <Routes>
-              <Route path="/" element={<Tracks />} />
-              <Route path="/:slug" element={<Track />} />
-              <Route path="/not-found" element={<NotFound />} />
-            </Routes>
-          </Container>
-        </Beats>
-      </ThemeProvider>
-    </Router>
+    <ThemeProvider theme={theme}>
+      <Favicon />
+      <Beats>
+        <Container>
+          <Route path="/">
+            <Tracks />
+          </Route>
+          <Route path="/:slug">
+            <Track />
+          </Route>
+          <Route path="/not-found">
+            <NotFound />
+          </Route>
+        </Container>
+      </Beats>
+    </ThemeProvider>
   );
 };

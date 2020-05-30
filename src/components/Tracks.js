@@ -2,7 +2,7 @@
 import { forwardRef, useRef, useEffect } from 'react';
 import { jsx } from 'theme-ui';
 import { format } from 'date-fns';
-import { Link } from 'react-router-dom';
+import { Link } from 'wouter';
 import hhmmss from 'hhmmss';
 import { useBeats } from './Beats';
 import { useHead } from '../hooks';

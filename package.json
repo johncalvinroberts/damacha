@@ -12,7 +12,7 @@
     "lint": "eslint . --ignore-path .gitignore"
   },
   "dependencies": {
-    "date-fns": "^2.15.0",
+    "date-fns": "^2.16.1",
     "hhmmss": "^1.0.0",
     "lodash.kebabcase": "^4.1.1",
     "react": "^16.13.1",

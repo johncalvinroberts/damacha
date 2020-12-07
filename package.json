@@ -29,7 +29,7 @@
     "@babel/preset-react": "^7.10.1",
     "is-url": "^1.2.4",
     "prompts": "^2.3.2",
-    "eslint": "^7.3.1",
+    "eslint": "^7.15.0",
     "eslint-config-wcl-frontend": "^2.0.1",
     "parcel": "latest",
     "parcel-plugin-static-files-copy": "^2.4.3",

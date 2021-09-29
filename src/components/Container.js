@@ -13,6 +13,9 @@ const Container = ({ children }) => {
     const n = (modes.indexOf(mode) + 1) % modes.length;
     setMode(modes[n]);
   };
+  const colorMode =
+    mode === 'default' ? theme.colors : theme.colors.modes[mode];
+  const { background } = colorMode;
   return (
     <Styled.root
       sx={{
@@ -78,6 +81,9 @@ const Container = ({ children }) => {
           height: '40px',
           display: 'flex',
           justifyContent: 'flex-start',
+          position: 'sticky',
+          bottom: '0',
+          backgroundColor: background,
         }}
       >
         <span>© {new Date().getFullYear()}</span>

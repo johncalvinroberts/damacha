@@ -2,7 +2,7 @@
 import { jsx, Styled, useColorMode } from 'theme-ui';
 import { Global } from '@emotion/core';
 import { Link } from 'wouter';
-import { modes } from './theme';
+import theme, { modes } from './theme';
 import SpecialButton from './SpecialButton';
 import Controls from './Controls';
 import Progress from './Progress';

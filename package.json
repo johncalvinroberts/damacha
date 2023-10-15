@@ -6,7 +6,7 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "parcel build src/index.html",
-    "postbuild": "react-snap",
+    "//postbuild": "react-snap",
     "start": "parcel serve src/index.html",
     "add-track": "node ./scripts/add-track.js",
     "lint": "eslint . --ignore-path .gitignore"

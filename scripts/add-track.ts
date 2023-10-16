@@ -1,18 +1,15 @@
-const fs = require('fs');
-const path = require('path');
-const { promisify } = require('util');
-const prompts = require('prompts');
-const isUrl = require('is-url');
-const hyphenate = require('lodash.kebabcase');
-const datefns = require('date-fns');
-const crypto = require('crypto');
-const tracks = require('../src/tracks.json');
+import { writeFile } from 'fs/promises';
+import path from 'path';
+import prompts from 'prompts';
+import dayjs from 'dayjs';
+import crypto from 'crypto';
+import { kebabCase } from '@/lib/utils';
+import tracks from '../data/tracks.json';
+import { Track } from '@/types/app';
 
-const writeFile = promisify(fs.writeFile);
+const filename = path.join(__dirname, '../data', 'tracks.json');
 
-const filename = path.join(__dirname, '../src', 'tracks.json');
-
-const generateId = (index) => {
+const generateId = (index: number): Promise<string> => {
   return new Promise((resolve, reject) => {
     crypto.randomBytes(2, (err, buf) => {
       if (err) reject(err);
@@ -23,13 +20,20 @@ const generateId = (index) => {
 };
 
 (async () => {
-  const dateUploaded = datefns.format(new Date(), 'yyyy-MM-dd');
+  const dateUploaded = dayjs(new Date()).format('yyyy-MM-dd');
   const response = await prompts([
     {
       type: 'text',
       name: 'url',
       message: 'Please enter URL',
-      validate: (value) => isUrl(value),
+      validate: (value: string) => {
+        try {
+          new URL(value);
+          return true;
+        } catch (error) {
+          return false;
+        }
+      },
     },
     {
       type: 'text',
@@ -44,10 +48,10 @@ const generateId = (index) => {
   ]);
 
   const { trackName, url, remark } = response;
-  const slug = encodeURIComponent(hyphenate(trackName));
+  const slug = encodeURIComponent(kebabCase(trackName));
   const id = await generateId(tracks.length);
-  const track = { trackName, slug, url, dateUploaded, id, remark };
-  console.log(JSON.stringify(track, null, 2)); //eslint-disable-line
+  const track: Track = { trackName, slug, url, dateUploaded, id, remark };
+  console.log(JSON.stringify(track, null, 2)); // eslint-disable-line
   const { confirm } = await prompts({
     type: 'confirm',
     name: 'confirm',

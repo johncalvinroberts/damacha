@@ -1,5 +1,11 @@
 import { useEffect } from 'react';
 
+type UseKeyboardHookArguments = {
+  playPause: () => void;
+  previous: () => void;
+  next: () => void;
+};
+
 const keys = {
   space: 32,
   j: 74,
@@ -8,9 +14,13 @@ const keys = {
   right: 39,
 };
 
-export default ({ playPause, previous, next }) => {
+const useKeyboard = ({
+  playPause,
+  previous,
+  next,
+}: UseKeyboardHookArguments) => {
   useEffect(() => {
-    const handleKeyDown = (e) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (e.metaKey || e.shiftKey || e.altKey || e.ctrlKey) return;
       switch (e.keyCode) {
         case keys.space:
@@ -35,3 +45,5 @@ export default ({ playPause, previous, next }) => {
     };
   }, [playPause, previous, next]);
 };
+
+export default useKeyboard;

@@ -1,31 +1,31 @@
-import { useColorMode } from 'theme-ui';
-import { useEffect, useState, useCallback } from 'react';
-import { useLocation } from 'wouter';
-import { modes } from '../components/theme';
+import { useEffect, useState, useCallback, MouseEvent } from 'react';
 
-export default (tracks = []) => {
-  const [audio, setAudio] = useState(null);
+import { Track } from '@/types/app';
+import { usePathname, useRouter } from 'next/navigation';
+
+const useAudio = (tracks: Track[] = []) => {
+  const [audio, setAudio] = useState<HTMLAudioElement>();
   const [time, setTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [index, setIndex] = useState(0);
-
-  const [location, setLocation] = useLocation();
+  const router = useRouter();
+  const pathname = usePathname();
 
   const playing = audio && !audio.paused;
   const progress = time / duration || 0;
 
-  const [mode, setMode] = useColorMode();
   const nextMode = useCallback(() => {
-    const n = (modes.indexOf(mode) + 1) % modes.length;
-    setMode(modes[n]);
-  }, [mode, setMode]);
+    console.log('TODO: set color mode');
+  }, []);
 
   const prevMode = useCallback(() => {
-    const n = (modes.indexOf(mode) - 1) % modes.length;
-    setMode(modes[n]);
-  }, [mode, setMode]);
+    console.log('TODO: set color mode');
+  }, []);
 
   const playPause = (track = tracks[index]) => {
+    if (!audio) {
+      throw new Error('audio element not yet defined');
+    }
     if (track.url === audio.src) {
       if (playing) {
         audio.pause();
@@ -41,6 +41,9 @@ export default (tracks = []) => {
   };
 
   const previous = () => {
+    if (!audio) {
+      throw new Error('audio element not yet defined');
+    }
     const n = (index - 1) % tracks.length;
     if (n < 0) {
       audio.pause();
@@ -52,26 +55,33 @@ export default (tracks = []) => {
     setIndex(n);
     audio.play();
     prevMode();
-    if (location.pathname !== '/') {
-      setLocation(`/${track.slug}`);
+    if (pathname !== '/') {
+      router.push(`/${track.slug}`);
     }
   };
 
   const next = useCallback(() => {
+    if (!audio) {
+      throw new Error('audio element not yet defined');
+    }
     const n = (index + 1) % tracks.length;
     const track = tracks[n];
     audio.src = track.url;
     setIndex(n);
     audio.play();
     nextMode();
-    if (location.pathname !== '/') {
-      setLocation(`/${track.slug}`);
+    if (pathname !== '/') {
+      router.push(`/${track.slug}`);
     }
-  }, [audio, index, location.pathname, nextMode, setLocation, tracks]);
+  }, [audio, index, nextMode, tracks, router, pathname]);
 
-  const seek = (e) => {
-    const n = e.clientX - e.target.offsetLeft;
-    const p = n / e.target.offsetWidth;
+  const seek = (e: MouseEvent) => {
+    if (!audio) {
+      throw new Error('audio element not yet defined');
+    }
+    const target = e.target as HTMLProgressElement;
+    const n = e.clientX - target.offsetLeft;
+    const p = n / target?.offsetWidth;
     audio.currentTime = p * duration;
   };
 
@@ -79,7 +89,7 @@ export default (tracks = []) => {
     const _audio = document.createElement('audio');
     setAudio(_audio);
     return () => {
-      setAudio(null);
+      setAudio(undefined);
     };
   }, []);
 
@@ -108,12 +118,12 @@ export default (tracks = []) => {
   }, [audio, index, next]);
 
   useEffect(() => {
-    if (location === '/') return;
-    const slug = location.replace(/^\//, '');
+    if (pathname === '/') return;
+    const slug = pathname.replace(/^\//, '');
     const index = tracks.findIndex((t) => t.slug === slug);
     if (index < 0) return;
     setIndex(index);
-  }, [location, tracks]);
+  }, [pathname, tracks]);
 
   return {
     audio,
@@ -129,3 +139,5 @@ export default (tracks = []) => {
     progress,
   };
 };
+
+export default useAudio;

@@ -1,42 +1,35 @@
 {
-  "name": "sssrpbp",
+  "name": "damacha",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "prebuild": "rimraf dist",
-    "build": "parcel build src/index.html",
-    "//postbuild": "react-snap",
-    "start": "parcel serve src/index.html",
-    "add-track": "node ./scripts/add-track.js",
-    "lint": "eslint . --ignore-path .gitignore"
+    "add-track": "bun ./scripts/add-track.ts",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "format": "prettier --plugin-search-dir . --write .",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "date-fns": "^2.15.0",
+    "dayjs": "^1.11.10",
     "hhmmss": "^1.0.0",
     "lodash.kebabcase": "^4.1.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-snap": "^1.23.0",
-    "rimraf": "^3.0.2",
-    "theme-ui": "^0.3.1",
-    "use-deep-compare-effect": "^1.4.0",
-    "wouter": "^2.5.3"
+    "next": "13.5.4",
+    "prompts": "^2.4.2",
+    "react": "^18",
+    "react-dom": "^18"
   },
   "devDependencies": {
-    "@babel/core": "^7.10.4",
-    "@babel/preset-env": "^7.10.3",
-    "@babel/preset-react": "^7.10.1",
-    "is-url": "^1.2.4",
-    "prompts": "^2.3.2",
-    "eslint": "^7.3.1",
-    "eslint-config-wcl-frontend": "^2.0.1",
-    "parcel": "latest",
-    "parcel-plugin-static-files-copy": "^2.6.0",
-    "prettier": "^2.0.5"
-  },
-  "reactSnap": {
-    "source": "dist",
-    "inlineCss": true
+    "@types/node": "^20",
+    "@types/prompts": "^2.4.6",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "13.5.4",
+    "eslint-config-prettier": "^9.0.0",
+    "prettier": "^3.0.3",
+    "typescript": "^5"
   }
 }

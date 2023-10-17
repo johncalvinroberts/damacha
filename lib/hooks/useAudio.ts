@@ -1,7 +1,6 @@
 import { useEffect, useState, useCallback, MouseEvent } from 'react';
-
-import { Track } from '@/types/app';
 import { usePathname, useRouter } from 'next/navigation';
+import { Track } from '@/types/app';
 
 const useAudio = (tracks: Track[] = []) => {
   const [audio, setAudio] = useState<HTMLAudioElement>();

@@ -1,0 +1,5 @@
+.header {
+  align-self: flex-start;
+  background: var(--primary-color);
+  padding: 3px;
+}

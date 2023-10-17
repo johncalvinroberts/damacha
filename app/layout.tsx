@@ -1,9 +1,16 @@
 import './globals.css';
+import clsx from 'clsx';
+import styles from './layout.module.css';
 import type { Metadata } from 'next';
+import { cookies } from 'next/headers';
 import { Roboto_Mono } from 'next/font/google';
 import Script from 'next/script';
 import { DEFAULT_METADATA } from '../lib/constants';
 import Player from '@/lib/components/Player';
+import StoreInitializer from '@/lib/components/StoreInitializer';
+import { getAllTracks } from '@/lib/tracks';
+import { Theme } from '@/types/app';
+import FavIcon from '@/lib/components/Favicon';
 
 const roboto = Roboto_Mono({ subsets: ['latin'] });
 
@@ -11,16 +18,44 @@ export const metadata: Metadata = {
   ...DEFAULT_METADATA,
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const tracks = await getAllTracks();
+  const cookieStore = cookies();
+  const theme: Theme = (cookieStore.get('theme')?.value as Theme) || 'purple';
   return (
-    <html lang="en">
+    <html lang="en" data-theme={theme}>
+      <StoreInitializer
+        preloadedState={{ tracks, theme, currentTrack: undefined }}
+      />
+      <FavIcon />
       <body className={roboto.className}>
-        <Player />
-        {children}
+        <div className={styles.root}>
+          <header className={styles.player}>
+            <Player />
+          </header>
+          <main className={styles.contentColumn}>{children}</main>
+          <footer className={styles.footer}>
+            <span>© {new Date().getFullYear()}</span>
+            <a
+              href="https://open.spotify.com/artist/0SNdS7f5RgPafbSwBraRKD?si=BGPOju1dQuG6qUpK95iCOA"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              spotify
+            </a>
+            <a
+              href="https://www.instagram.com/omg_damacha/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              instagram
+            </a>
+          </footer>
+        </div>
       </body>
       {process.env.NODE_ENV === 'production' && (
         <Script

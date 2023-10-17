@@ -1,20 +1,13 @@
 import { getAllTracks } from '@/lib/tracks';
-import Link from 'next/link';
+import Track from '@/lib/components/Track/Track';
 
 export default async function Home() {
   const tracks = await getAllTracks();
   return (
-    <main className="">
-      <div>
-        <p>hello new damacha</p>
-      </div>
-      <ul>
-        {tracks.map((item) => (
-          <li key={item.slug}>
-            <Link href={`/${item.slug}`}>{item.trackName}</Link>
-          </li>
-        ))}
-      </ul>
-    </main>
+    <ul>
+      {tracks.map((item) => (
+        <Track track={item} key={item.slug} />
+      ))}
+    </ul>
   );
 }

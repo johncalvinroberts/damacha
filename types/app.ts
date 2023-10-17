@@ -1,3 +1,7 @@
+export const Themes = ['purple', 'dark', 'light', 'pink', 'regal'] as const;
+
+export type Theme = (typeof Themes)[number];
+
 export type Track = {
   trackName: string;
   slug: string;
@@ -5,4 +9,10 @@ export type Track = {
   dateUploaded: string;
   id: string;
   remark?: string | undefined;
+};
+
+export type DamachaState = {
+  tracks: Track[];
+  currentTrack: Track | undefined;
+  theme: Theme;
 };

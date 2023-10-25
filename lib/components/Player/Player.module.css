@@ -1,5 +1,17 @@
-.header {
-  align-self: flex-start;
-  background: var(--primary-color);
-  padding: 3px;
+.root {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.player {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.skipButton {
+  width: 32px;
+  height: 32px;
 }

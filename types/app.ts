@@ -13,6 +13,9 @@ export type Track = {
 
 export type DamachaState = {
   tracks: Track[];
-  currentTrack: Track | undefined;
+  currentTrackIndex: number;
   theme: Theme;
+  audioElement: HTMLAudioElement;
+  duration: number;
+  time: number;
 };

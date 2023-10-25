@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useAudio } from '.';
 
 type UseKeyboardHookArguments = {
   playPause: () => void;
@@ -14,11 +15,8 @@ const keys = {
   right: 39,
 };
 
-const useKeyboard = ({
-  playPause,
-  previous,
-  next,
-}: UseKeyboardHookArguments) => {
+const useKeyboard = () => {
+  const { next, previous, playPause } = useAudio();
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.metaKey || e.shiftKey || e.altKey || e.ctrlKey) return;

@@ -1,0 +1,32 @@
+.root {
+  appearance: none;
+  color: inherit;
+  background: transparent;
+  padding: 1px;
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  border-radius: 99999px;
+  cursor: pointer;
+  border: 0;
+  aspect-ratio: 1/1;
+  display: inline-flex;
+}
+
+.root:focus {
+  outline: 0;
+  box-shadow: 0 0 0 2px;
+  color: var(--text);
+}
+
+.root:hover {
+  background-color: var(--muted);
+}
+
+.piece {
+  position: absolute;
+  top: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}

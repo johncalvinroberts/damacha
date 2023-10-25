@@ -4,33 +4,33 @@
 }
 
 html[data-theme='purple'] {
-  --primary-color: #3e3240;
-  --secondary-color: #e0b0ff;
-  --text: #f5f5dc;
+  --primary: #3e3240;
+  --text: #33ffff;
+  --muted: #33ffff1a;
 }
 
 html[data-theme='dark'] {
-  --primary-color: #333;
-  --secondary-color: #ffff00;
-  --text: #f5f5dc;
+  --primary: #171717;
+  --text: #33ffbb;
+  --muted: #33ffbb1a;
 }
 
 html[data-theme='light'] {
-  --primary-color: #ffffff;
-  --secondary-color: #f0f0f0;
-  --text: #333;
+  --primary: #ffffff;
+  --text: #3e3240;
+  --muted: #3e32401a;
 }
 
 html[data-theme='pink'] {
-  --primary-color: #ffc0cb;
-  --secondary-color: #ff69b4;
-  --text: #333;
+  --primary: #ffc0cb;
+  --text: #674f4f;
+  --muted: #674f4f1a;
 }
 
 html[data-theme='regal'] {
-  --primary-color: #800020;
-  --secondary-color: #b00060;
-  --text: #f5f5dc;
+  --primary: #18192f;
+  --text: #ff3377;
+  --muted: #ff33771a;
 }
 
 * {
@@ -45,7 +45,7 @@ body {
   min-height: 100vh;
   margin: 0;
   color: var(--text);
-  background-color: var(--primary-color);
+  background-color: var(--primary);
 }
 
 a {
@@ -53,8 +53,9 @@ a {
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  height: 20px;
 }
 a:hover {
   background-color: var(--text);
-  color: var(--primary-color);
+  color: var(--primary);
 }

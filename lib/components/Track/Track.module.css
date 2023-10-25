@@ -1,4 +1,12 @@
 .root {
   padding: 10px;
   list-style: none;
+  display: flex;
+  align-items: center;
+  user-select: none;
+  cursor: pointer;
+}
+
+.root:hover {
+  background-color: var(--muted);
 }

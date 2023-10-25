@@ -1,135 +1,83 @@
 import { useEffect, useState, useCallback, MouseEvent } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
-import { Track } from '@/types/app';
+import { useStore, cycleThemeBackward, cycleThemeForward } from '../store';
 
-const useAudio = (tracks: Track[] = []) => {
-  const [audio, setAudio] = useState<HTMLAudioElement>();
-  const [time, setTime] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [index, setIndex] = useState(0);
+const useAudio = () => {
+  const { tracks, currentTrackIndex, audioElement, time, duration } =
+    useStore();
+
   const router = useRouter();
   const pathname = usePathname();
 
-  const playing = audio && !audio.paused;
+  const playing = audioElement && !audioElement.paused;
   const progress = time / duration || 0;
 
-  const nextMode = useCallback(() => {
-    console.log('TODO: set color mode');
-  }, []);
-
-  const prevMode = useCallback(() => {
-    console.log('TODO: set color mode');
-  }, []);
-
-  const playPause = (track = tracks[index]) => {
-    if (!audio) {
+  const playPause = (track = tracks[currentTrackIndex]) => {
+    if (!audioElement) {
       throw new Error('audio element not yet defined');
     }
-    if (track.url === audio.src) {
+    if (track.url === audioElement.src) {
       if (playing) {
-        audio.pause();
+        audioElement.pause();
       } else {
-        audio.play();
+        audioElement.play();
       }
     } else {
-      const i = tracks.indexOf(track);
-      audio.src = track.url;
-      audio.play();
-      setIndex(i);
+      audioElement.src = track.url;
+      audioElement.play();
     }
   };
 
   const previous = () => {
-    if (!audio) {
+    if (!audioElement) {
       throw new Error('audio element not yet defined');
     }
-    const n = (index - 1) % tracks.length;
+    const n = (currentTrackIndex - 1) % tracks.length;
     if (n < 0) {
-      audio.pause();
-      audio.currentTime = 0;
+      audioElement.pause();
+      audioElement.currentTime = 0;
       return;
     }
     const track = tracks[n];
-    audio.src = track.url;
-    setIndex(n);
-    audio.play();
-    prevMode();
+    audioElement.src = track.url;
+    useStore.setState({ currentTrackIndex: n });
+    audioElement.play();
+    cycleThemeBackward();
     if (pathname !== '/') {
       router.push(`/${track.slug}`);
     }
   };
 
   const next = useCallback(() => {
-    if (!audio) {
+    if (!audioElement) {
       throw new Error('audio element not yet defined');
     }
-    const n = (index + 1) % tracks.length;
+    const n = (currentTrackIndex + 1) % tracks.length;
     const track = tracks[n];
-    audio.src = track.url;
-    setIndex(n);
-    audio.play();
-    nextMode();
+    audioElement.src = track.url;
+    useStore.setState({ currentTrackIndex: n });
+    audioElement.play();
+    cycleThemeForward();
     if (pathname !== '/') {
       router.push(`/${track.slug}`);
     }
-  }, [audio, index, nextMode, tracks, router, pathname]);
+  }, [audioElement, currentTrackIndex, tracks, pathname, router]);
 
   const seek = (e: MouseEvent) => {
-    if (!audio) {
+    if (!audioElement) {
       throw new Error('audio element not yet defined');
     }
     const target = e.target as HTMLProgressElement;
     const n = e.clientX - target.offsetLeft;
     const p = n / target?.offsetWidth;
-    audio.currentTime = p * duration;
+    audioElement.currentTime = p * duration;
   };
 
-  useEffect(() => {
-    const _audio = document.createElement('audio');
-    setAudio(_audio);
-    return () => {
-      setAudio(undefined);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!audio) return () => {};
-    const handleTimeUpdate = () => {
-      setTime(audio.currentTime);
-    };
-    const handleMetadata = () => {
-      setDuration(audio.duration);
-    };
-    audio.addEventListener('timeupdate', handleTimeUpdate);
-    audio.addEventListener('loadedmetadata', handleMetadata);
-    return () => {
-      audio.removeEventListener('timeupdate', handleTimeUpdate);
-      audio.removeEventListener('loadedmetadata', handleMetadata);
-    };
-  }, [audio]);
-
-  useEffect(() => {
-    if (!audio) return;
-    audio.addEventListener('ended', next);
-    return () => {
-      audio.removeEventListener('ended', next);
-    };
-  }, [audio, index, next]);
-
-  useEffect(() => {
-    if (pathname === '/') return;
-    const slug = pathname.replace(/^\//, '');
-    const index = tracks.findIndex((t) => t.slug === slug);
-    if (index < 0) return;
-    setIndex(index);
-  }, [pathname, tracks]);
-
   return {
-    audio,
+    audioElement,
     time,
     duration,
-    index,
-    setIndex,
+    currentTrackIndex,
     playing,
     playPause,
     previous,

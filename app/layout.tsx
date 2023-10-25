@@ -28,10 +28,7 @@ export default async function RootLayout({
   const theme: Theme = (cookieStore.get('theme')?.value as Theme) || 'purple';
   return (
     <html lang="en" data-theme={theme}>
-      <StoreInitializer
-        preloadedState={{ tracks, theme, currentTrack: undefined }}
-      />
-      <FavIcon />
+      <StoreInitializer preloadedState={{ tracks, theme }} />
       <body className={roboto.className}>
         <div className={styles.root}>
           <header className={styles.player}>
@@ -56,6 +53,7 @@ export default async function RootLayout({
             </a>
           </footer>
         </div>
+        <FavIcon />
       </body>
       {process.env.NODE_ENV === 'production' && (
         <Script

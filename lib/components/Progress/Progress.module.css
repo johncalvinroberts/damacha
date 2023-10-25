@@ -1,0 +1,44 @@
+#waveform ::part(cursor):before {
+  content: '🏄';
+}
+#waveform ::part(region) {
+  font-family: fantasy;
+}
+
+/* .progress {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 16px;
+  margin: 0;
+  cursor: pointer;
+  border: 0px solid transparent;
+  border-top-width: 5px;
+  border-bottom-width: 5px;
+}
+
+.progress::-webkit-progress-bar {
+  background-color: muted;
+}
+
+.progress::-webkit-progress-value {
+  transition: background-color 0.2s ease-out;
+  background-color: currentcolor;
+}
+
+.progress:hover::-webkit-progress-bar {
+  /* background-color: primary; */
+/* } */
+
+/* .progress:hover::-webkit-progress-value { */
+/* background-color: primary; */
+/* } */
+
+.progressBox {
+  width: 100%;
+}
+
+.timeBox {
+  display: flex;
+  justify-content: space-between;
+}

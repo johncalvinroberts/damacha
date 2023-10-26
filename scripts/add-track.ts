@@ -50,7 +50,14 @@ const generateId = (index: number): Promise<string> => {
   const { trackName, url, remark } = response;
   const slug = encodeURIComponent(kebabCase(trackName));
   const id = await generateId(tracks.length);
-  const track: Track = { trackName, slug, url, dateUploaded, id, remark };
+  const track: Omit<Track, 'index'> = {
+    trackName,
+    slug,
+    url,
+    dateUploaded,
+    id,
+    remark,
+  };
   console.log(JSON.stringify(track, null, 2)); // eslint-disable-line
   const { confirm } = await prompts({
     type: 'confirm',

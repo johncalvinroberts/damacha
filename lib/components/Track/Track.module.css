@@ -7,6 +7,14 @@
   cursor: pointer;
 }
 
+.root.active {
+  background-color: var(--muted);
+}
+
 .root:hover {
   background-color: var(--muted);
+}
+
+button.playButton {
+  margin-right: 10px;
 }

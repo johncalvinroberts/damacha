@@ -1,12 +1,38 @@
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { getAllTracks, getTrackBySlug } from '@/lib/tracks';
 import { DEFAULT_METADATA } from '@/lib/constants';
+import NiceDate from '@/lib/components/NiceDate';
+import styles from './page.module.css';
+import TrackPlayButton from '@/lib/components/TrackPlayButton';
+import Link from 'next/link';
 
 type Props = { params: { slug: string } };
 
 const TrackDetail = async ({ params }: Props) => {
   const track = await getTrackBySlug(params.slug);
-  return <>{track?.trackName}</>;
+  if (!track) {
+    notFound();
+    return <></>;
+  }
+  const { dateUploaded, trackName, remark } = track;
+  return (
+    <div className={styles.root}>
+      <h1>
+        {trackName} <TrackPlayButton track={track} />
+      </h1>
+      {remark && (
+        <div
+          dangerouslySetInnerHTML={{ __html: remark }}
+          className={styles.remark}
+        />
+      )}
+      <div className={styles.date}>
+        Date Uploaded: <NiceDate date={dateUploaded} />
+      </div>
+      <Link href="/">home</Link>
+    </div>
+  );
 };
 
 // statically generates all track pages

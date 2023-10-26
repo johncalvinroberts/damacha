@@ -1,9 +1,14 @@
 'use client';
 import { useEffect } from 'react';
 import { useStore, cycleThemeForward } from '@/lib/store';
-import { Themes } from '@/types/app';
+import Button from '../Button';
+import styles from './ThemeToggle.module.css';
 
-const ThemeToggle = () => {
+type Props = {
+  className?: string;
+};
+
+const ThemeToggle = ({ className }: Props) => {
   const { theme } = useStore();
 
   useEffect(() => {
@@ -11,7 +16,17 @@ const ThemeToggle = () => {
     document.querySelector('html')?.setAttribute('data-theme', theme);
   }, [theme]);
 
-  return <button onClick={cycleThemeForward}>{theme}</button>;
+  return (
+    <Button
+      onClick={cycleThemeForward}
+      title={`Toggle theme. Current theme: ${theme}`}
+      className={styles.root}
+    >
+      <div className={styles.spinnerOuter}>
+        <div className={styles.spinnerInner} />
+      </div>
+    </Button>
+  );
 };
 
 export default ThemeToggle;

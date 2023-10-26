@@ -6,6 +6,11 @@ const initialState: DamachaState = {
   tracks: [],
   theme: 'purple',
   currentTrackIndex: 0,
+  wavesurfer: undefined,
+  duration: 0,
+  time: 0,
+  playing: false,
+  loading: false,
 };
 
 export const useStore = create<DamachaState>(() => initialState);

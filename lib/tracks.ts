@@ -4,11 +4,13 @@ import { Track } from '@/types/app';
 import tracksJson from '../data/tracks.json';
 
 export const getAllTracksFromFileSystem = async (): Promise<Track[]> => {
-  return tracksJson.sort((a, b) => {
-    const aDate = new Date(a.dateUploaded);
-    const bDate = new Date(b.dateUploaded);
-    return bDate.valueOf() - aDate.valueOf();
-  });
+  return tracksJson
+    .sort((a, b) => {
+      const aDate = new Date(a.dateUploaded);
+      const bDate = new Date(b.dateUploaded);
+      return bDate.valueOf() - aDate.valueOf();
+    })
+    .map((item, index) => ({ ...item, index }));
 };
 
 export const getAllTracks: () => Promise<Track[]> = cache(

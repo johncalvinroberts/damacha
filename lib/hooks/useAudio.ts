@@ -1,80 +1,76 @@
 import { useEffect, useState, useCallback, MouseEvent } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useStore, cycleThemeBackward, cycleThemeForward } from '../store';
+import { Track } from '@/types/app';
 
 const useAudio = () => {
-  const { tracks, currentTrackIndex, audioElement, time, duration } =
+  const { tracks, currentTrackIndex, wavesurfer, time, duration, playing } =
     useStore();
 
   const router = useRouter();
   const pathname = usePathname();
 
-  const playing = audioElement && !audioElement.paused;
   const progress = time / duration || 0;
 
-  const playPause = (track = tracks[currentTrackIndex]) => {
-    if (!audioElement) {
+  const playPause = async () => {
+    const track = tracks[currentTrackIndex];
+    const mediaElement = wavesurfer?.getMediaElement();
+    if (!mediaElement || !wavesurfer) {
       throw new Error('audio element not yet defined');
     }
-    if (track.url === audioElement.src) {
-      if (playing) {
-        audioElement.pause();
-      } else {
-        audioElement.play();
-      }
+    if (!mediaElement.src) {
+      await wavesurfer.load(track.url);
+      await wavesurfer.play();
+      return;
+    }
+    if (playing) {
+      wavesurfer.pause();
     } else {
-      audioElement.src = track.url;
-      audioElement.play();
+      wavesurfer.play();
     }
   };
 
-  const previous = () => {
-    if (!audioElement) {
+  const previous = async () => {
+    if (!wavesurfer) {
       throw new Error('audio element not yet defined');
     }
     const n = (currentTrackIndex - 1) % tracks.length;
     if (n < 0) {
-      audioElement.pause();
-      audioElement.currentTime = 0;
+      wavesurfer.pause();
+      wavesurfer.seekTo(0);
       return;
     }
     const track = tracks[n];
-    audioElement.src = track.url;
     useStore.setState({ currentTrackIndex: n });
-    audioElement.play();
+    await wavesurfer.load(track.url);
+    await wavesurfer.play();
     cycleThemeBackward();
     if (pathname !== '/') {
       router.push(`/${track.slug}`);
     }
   };
 
-  const next = useCallback(() => {
-    if (!audioElement) {
+  const next = async () => {
+    if (!wavesurfer) {
       throw new Error('audio element not yet defined');
     }
     const n = (currentTrackIndex + 1) % tracks.length;
     const track = tracks[n];
-    audioElement.src = track.url;
     useStore.setState({ currentTrackIndex: n });
-    audioElement.play();
+    await wavesurfer.load(track.url);
+    await wavesurfer.play();
     cycleThemeForward();
     if (pathname !== '/') {
       router.push(`/${track.slug}`);
     }
-  }, [audioElement, currentTrackIndex, tracks, pathname, router]);
+  };
 
-  const seek = (e: MouseEvent) => {
-    if (!audioElement) {
-      throw new Error('audio element not yet defined');
-    }
-    const target = e.target as HTMLProgressElement;
-    const n = e.clientX - target.offsetLeft;
-    const p = n / target?.offsetWidth;
-    audioElement.currentTime = p * duration;
+  const load = async (track: Track) => {
+    useStore.setState({ currentTrackIndex: track.index });
+    await wavesurfer?.load(track.url);
   };
 
   return {
-    audioElement,
     time,
     duration,
     currentTrackIndex,
@@ -82,8 +78,8 @@ const useAudio = () => {
     playPause,
     previous,
     next,
-    seek,
     progress,
+    load,
   };
 };
 

@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import ThemeToggle from '../ThemeToggle';
 import styles from './Player.module.css';
 import Button from '../Button';
@@ -7,45 +7,19 @@ import { Previous, Pause, Play, Next } from '../icons';
 import { useAudio, useKeyboard } from '@/lib/hooks';
 import { useStore } from '@/lib/store';
 import { usePathname } from 'next/navigation';
-import Progress from '../Progress/Progress';
+import { useWavesurfer } from '@/lib/hooks';
+import { hhmmss } from '@/lib/utils';
+import Loading from '../Loading';
 
 const Player = () => {
-  const { next, previous, playPause, playing } = useAudio();
-  const { tracks, audioElement } = useStore();
+  const { next, previous, playPause, playing, duration, time, load } =
+    useAudio();
+  const { tracks, loading, currentTrackIndex } = useStore();
+  const waveSurferContainer = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
-
+  const initialTrackUrl = tracks[currentTrackIndex].url;
+  useWavesurfer(waveSurferContainer, undefined, initialTrackUrl);
   useKeyboard();
-  useEffect(() => {
-    const audioElement = document.createElement('audio');
-    useStore.setState({ audioElement });
-    return () => {
-      useStore.setState({ audioElement: undefined });
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!audioElement) return () => {};
-    const handleTimeUpdate = () => {
-      useStore.setState({ time: audioElement.currentTime ?? 0 });
-    };
-    const handleMetadata = () => {
-      useStore.setState({ duration: audioElement.duration ?? 0 });
-    };
-    audioElement.addEventListener('timeupdate', handleTimeUpdate);
-    audioElement.addEventListener('loadedmetadata', handleMetadata);
-    return () => {
-      audioElement.removeEventListener('timeupdate', handleTimeUpdate);
-      audioElement.removeEventListener('loadedmetadata', handleMetadata);
-    };
-  }, [audioElement]);
-
-  useEffect(() => {
-    if (!audioElement) return;
-    audioElement.addEventListener('ended', next);
-    return () => {
-      audioElement.removeEventListener('ended', next);
-    };
-  }, [audioElement, next]);
 
   useEffect(() => {
     if (pathname === '/') return;
@@ -58,22 +32,31 @@ const Player = () => {
   return (
     <div className={styles.root}>
       <div className={styles.player}>
-        <Button
-          title="Previous"
-          onClick={previous}
-          className={styles.skipButton}
-        >
-          <Previous />
-        </Button>
-        <Button title="Play/Pause" onClick={() => playPause()}>
-          {playing ? <Pause size={40} /> : <Play size={40} />}
-        </Button>
-        <Button title="Next" onClick={next} className={styles.skipButton}>
-          <Next />
-        </Button>
-        <Progress />
+        <div className={styles.controls}>
+          <Button
+            title="Previous"
+            onClick={previous}
+            className={styles.skipButton}
+          >
+            <Previous />
+          </Button>
+          <Button title="Play/Pause" onClick={() => playPause()}>
+            {loading && <Loading size="lg" />}
+            {!loading && playing && <Pause size={40} />}
+            {!loading && !playing && <Play size={40} />}
+          </Button>
+          <Button title="Next" onClick={next} className={styles.skipButton}>
+            <Next />
+          </Button>
+        </div>
       </div>
-      <ThemeToggle />
+      <div className={styles.wavesurferContainer}>
+        <div ref={waveSurferContainer} className={styles.wavesurfer}></div>
+        <div className={styles.timeBox}>
+          <span>{hhmmss(time)}</span>/<span>{hhmmss(duration)}</span>
+        </div>
+      </div>
+      <ThemeToggle className={styles.themeToggle} />
     </div>
   );
 };

@@ -1,6 +1,9 @@
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
+  --z-index-bg: 10;
+  --z-index-controls: 20;
+  --z-index-floating: 30;
 }
 
 html[data-theme='purple'] {
@@ -54,6 +57,7 @@ a {
   position: relative;
   overflow: hidden;
   height: 20px;
+  margin-top: -1px;
 }
 a:hover {
   background-color: var(--text);

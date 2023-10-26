@@ -1,0 +1,46 @@
+.root {
+}
+.root:focus {
+  color: transparent;
+}
+
+.spinnerOuter {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+  margin: 0 auto;
+  position: relative;
+  padding-top: 5px;
+}
+
+.spinnerInner {
+  background-image: linear-gradient(
+    to top,
+    hsl(340, 100%, 80%) 0%,
+    #330867 100%
+  );
+  width: 300%;
+  height: 200px;
+  animation: backgroundMoving 4s linear infinite;
+  animation-direction: alternate;
+  position: relative;
+  top: -50px;
+  left: -50px;
+  transition: all 03s ease;
+}
+
+.spinnerInner:hover {
+  background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
+}
+
+@keyframes backgroundMoving {
+  0% {
+    left: -20px;
+    top: -12px;
+  }
+  100% {
+    left: -80px;
+    top: -100px;
+  }
+}

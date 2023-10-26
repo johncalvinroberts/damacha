@@ -1,0 +1,20 @@
+.root {
+  padding: 10px;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  user-select: none;
+  cursor: pointer;
+}
+
+.root.active {
+  background-color: var(--muted);
+}
+
+.root:hover {
+  background-color: var(--muted);
+}
+
+button.playButton {
+  margin-right: 10px;
+}

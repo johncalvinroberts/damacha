@@ -1,0 +1,42 @@
+.root {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.player {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  background-color: var(--primary);
+  z-index: 1;
+}
+
+.footer {
+  padding: 0 10px;
+  height: 40px;
+  display: flex;
+  justify-content: flex-start;
+  bottom: 0;
+  position: sticky;
+  background-color: var(--primary);
+  z-index: 1;
+}
+
+.footer a,
+.footer span {
+  margin-right: 10px;
+}
+
+.contentColumn {
+  max-width: 768px;
+  min-height: calc(100vh - 40px);
+}
+
+@media (max-width: 980px) {
+  .root {
+    grid-template-columns: 1fr;
+  }
+}

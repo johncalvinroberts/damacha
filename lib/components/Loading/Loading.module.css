@@ -1,0 +1,29 @@
+.root {
+  border-radius: 100%;
+  animation: spinning 1500ms infinite cubic-bezier(0.9, -0.13, 0.35, 0.9);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sm {
+  height: 24px;
+  width: 24px;
+  font-size: 8px;
+}
+
+.lg {
+  height: 40px;
+  width: 40px;
+  font-size: 12px;
+}
+
+@keyframes spinning {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
+}

@@ -1,23 +1,23 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import WaveSurfer, { WaveSurferOptions } from 'wavesurfer.js';
 import { useStore } from '../store';
 
 // Run this hook only once, no more than one component should use this hook
 const useWavesurfer = (
   containerRef: React.RefObject<HTMLDivElement>,
-  options?: WaveSurferOptions,
+  options?: Partial<WaveSurferOptions>,
   initialTrackUrl?: string,
 ) => {
   const { wavesurfer } = useStore();
+  const optionsRef = useRef<Partial<WaveSurferOptions>>(options || {});
   // Initialize wavesurfer when the container mounts
   // or any of the props change
   useEffect(() => {
     if (!containerRef.current) return;
 
     const wavesurfer = WaveSurfer.create({
-      ...options,
+      ...optionsRef.current,
       container: containerRef.current,
-      waveColor: 'var(--text)',
       cursorColor: 'green',
       height: 50,
     });
@@ -25,9 +25,9 @@ const useWavesurfer = (
     useStore.setState({ wavesurfer });
 
     return () => {
-      wavesurfer.destroy();
+      wavesurfer?.destroy();
     };
-  }, [options, containerRef]);
+  }, [containerRef]);
 
   useEffect(() => {
     if (!wavesurfer) return;

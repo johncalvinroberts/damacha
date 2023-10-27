@@ -4,7 +4,7 @@ import ThemeToggle from '../ThemeToggle';
 import styles from './Player.module.css';
 import Button from '../Button';
 import { Previous, Pause, Play, Next } from '../icons';
-import { useAudio, useKeyboard } from '@/lib/hooks';
+import { useAudio, useCssVariable, useKeyboard } from '@/lib/hooks';
 import { useStore } from '@/lib/store';
 import { useWavesurfer } from '@/lib/hooks';
 import { hhmmss } from '@/lib/utils';
@@ -13,9 +13,13 @@ import Loading from '../Loading';
 const Player = () => {
   const { next, previous, playPause, playing, duration, time } = useAudio();
   const { tracks, loading, currentTrackIndex } = useStore();
+  const options = {
+    // waveColor: "",
+    // progressColor: mutedColor || '',
+  };
   const waveSurferContainer = useRef<HTMLDivElement>(null);
   const initialTrackUrl = tracks[currentTrackIndex].url;
-  useWavesurfer(waveSurferContainer, undefined, initialTrackUrl);
+  useWavesurfer(waveSurferContainer, options, initialTrackUrl);
   useKeyboard();
 
   return (

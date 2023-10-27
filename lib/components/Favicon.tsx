@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-import { useInterval } from '@/lib/hooks';
+import { useCssVariable, useInterval } from '@/lib/hooks';
 
 const letters = [
   ...'✨💅✨♻️✨🦜✨🍄✨☄️✨💫✨🐱✨💆☘️☘️🍀🌿🌳🌲🐿🌲🌲🌱🍃🎋🌲🌸🌸🌼🌺🥀💐🌕🌖🌗🌘🌑🌒🌓🌔🌎🌍🌏🌔🌓🌒🌑🌘🌗🌖🌕',
@@ -9,10 +9,8 @@ const letters = [
 function useWickedFavIcon() {
   const [index, setIndex] = useState(0);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const isServer = typeof window === 'undefined';
-  const bodyStyles = isServer ? null : window?.getComputedStyle(document.body);
-  const text = bodyStyles?.getPropertyValue('--text') || '';
-  const background = bodyStyles?.getPropertyValue('--primary') || '';
+  const text = useCssVariable('--text') || '';
+  const background = useCssVariable('--primary') || '';
 
   useInterval(() => {
     setIndex(index >= letters.length - 1 ? 0 : index + 1);

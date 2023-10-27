@@ -15,11 +15,11 @@ const TrackPlayButton = ({ track }: Props) => {
   const { playing, playPause, currentTrackIndex, load } = useAudio();
   const { loading } = useStore();
   const isCurrentTrack = currentTrackIndex === track.index;
-  const handleClick = async () => {
+  const handleClick = () => {
     if (isCurrentTrack) {
       playPause();
     } else {
-      await load(track);
+      load(track);
     }
   };
   return (

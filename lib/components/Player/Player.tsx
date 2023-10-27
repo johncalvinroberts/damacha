@@ -6,28 +6,17 @@ import Button from '../Button';
 import { Previous, Pause, Play, Next } from '../icons';
 import { useAudio, useKeyboard } from '@/lib/hooks';
 import { useStore } from '@/lib/store';
-import { usePathname } from 'next/navigation';
 import { useWavesurfer } from '@/lib/hooks';
 import { hhmmss } from '@/lib/utils';
 import Loading from '../Loading';
 
 const Player = () => {
-  const { next, previous, playPause, playing, duration, time, load } =
-    useAudio();
+  const { next, previous, playPause, playing, duration, time } = useAudio();
   const { tracks, loading, currentTrackIndex } = useStore();
   const waveSurferContainer = useRef<HTMLDivElement>(null);
-  const pathname = usePathname();
   const initialTrackUrl = tracks[currentTrackIndex].url;
   useWavesurfer(waveSurferContainer, undefined, initialTrackUrl);
   useKeyboard();
-
-  useEffect(() => {
-    if (pathname === '/') return;
-    const slug = pathname.replace(/^\//, '');
-    const index = tracks.findIndex((t) => t.slug === slug);
-    if (index < 0) return;
-    useStore.setState({ currentTrackIndex: index });
-  }, [pathname, tracks]);
 
   return (
     <div className={styles.root}>

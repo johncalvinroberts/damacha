@@ -1,4 +1,3 @@
-import { useEffect, useState, useCallback, MouseEvent } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useStore, cycleThemeBackward, cycleThemeForward } from '../store';
 import { Track } from '@/types/app';
@@ -68,6 +67,8 @@ const useAudio = () => {
   const load = async (track: Track) => {
     useStore.setState({ currentTrackIndex: track.index });
     await wavesurfer?.load(track.url);
+    wavesurfer?.seekTo(0);
+    wavesurfer?.play();
   };
 
   return {

@@ -20,7 +20,6 @@ const TrackPlayButton = ({ track }: Props) => {
       playPause();
     } else {
       await load(track);
-      await playPause();
     }
   };
   return (

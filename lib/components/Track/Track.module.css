@@ -24,6 +24,7 @@ button.playButton {
 .id {
   font-size: 10px;
   margin-right: 10px;
+  flex: 0 0 60px;
 }
 .date {
   font-size: 10px;
@@ -34,4 +35,5 @@ button.playButton {
   align-items: center;
   margin-right: 10px;
   flex: 1;
+  height: 100%;
 }

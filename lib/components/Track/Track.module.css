@@ -37,3 +37,19 @@ button.playButton {
   flex: 1;
   height: 100%;
 }
+
+@media (max-width: 980px) {
+  .root {
+    flex-wrap: wrap;
+  }
+  .link {
+    flex: 0 0 100%;
+    /* align-items: flex-start; */
+  }
+  .id {
+    display: none;
+  }
+  button.playButton {
+    margin-bottom: 10px;
+  }
+}

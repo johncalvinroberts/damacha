@@ -24,7 +24,6 @@ const Player = () => {
   useWavesurfer(waveSurferContainer, options, initialTrackUrl);
   useKeyboard();
   useEffect(() => {
-    console.log({ mutedColor, textColor });
     wavesurfer?.setOptions({
       waveColor: textColor,
       progressColor: mutedColor || '',
@@ -58,7 +57,6 @@ const Player = () => {
           <span>{hhmmss(time)}</span>/<span>{hhmmss(duration)}</span>
         </div>
       </div>
-      <ThemeToggle className={styles.themeToggle} />
     </div>
   );
 };

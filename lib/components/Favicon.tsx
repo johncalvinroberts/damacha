@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useCssVariable, useInterval } from '@/lib/hooks';
 
 const letters = [

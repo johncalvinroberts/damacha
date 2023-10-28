@@ -1,7 +1,7 @@
 import './globals.css';
-import clsx from 'clsx';
 import styles from './layout.module.css';
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { cookies } from 'next/headers';
 import { Roboto_Mono } from 'next/font/google';
 import Script from 'next/script';
@@ -11,6 +11,7 @@ import StoreInitializer from '@/lib/components/StoreInitializer';
 import { getAllTracks } from '@/lib/tracks';
 import { Theme } from '@/types/app';
 import FavIcon from '@/lib/components/Favicon';
+import ThemeToggle from '@/lib/components/ThemeToggle';
 
 const roboto = Roboto_Mono({ subsets: ['latin'] });
 
@@ -32,6 +33,10 @@ export default async function RootLayout({
       <body className={roboto.className}>
         <div className={styles.root}>
           <header className={styles.player}>
+            <div className={styles.top}>
+              <Link href="/">damacha</Link>
+              <ThemeToggle className={styles.themeToggle} />
+            </div>
             <Player />
           </header>
           <main className={styles.contentColumn}>{children}</main>

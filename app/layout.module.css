@@ -36,7 +36,25 @@
 }
 
 @media (max-width: 980px) {
+  .contentColumn {
+    max-width: unset;
+  }
   .root {
     grid-template-columns: 1fr;
   }
+}
+
+.top {
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+}
+
+.top a {
+  font-size: 32px;
+  font-weight: 500;
+  height: unset;
+  text-decoration: none;
+  margin-top: 0;
+  margin-right: 10px;
 }

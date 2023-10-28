@@ -19,7 +19,8 @@ const TrackDetail = async ({ params }: Props) => {
   return (
     <div className={styles.root}>
       <div className={styles.top}>
-        [{track.id}] <TrackPlayButton track={track} />
+        <span>[{track.id}]</span>
+        <TrackPlayButton track={track} />
       </div>
       <h1 className={styles.title}>{trackName}</h1>
       {remark && (
@@ -31,7 +32,6 @@ const TrackDetail = async ({ params }: Props) => {
       <div className={styles.date}>
         Date Uploaded: <NiceDate date={dateUploaded} />
       </div>
-      <Link href="/">home</Link>
     </div>
   );
 };

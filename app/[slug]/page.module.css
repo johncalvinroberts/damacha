@@ -15,6 +15,10 @@
   align-items: center;
 }
 
+.top > span {
+  margin-right: 10px;
+}
+
 .title {
   margin-bottom: 10px;
 }

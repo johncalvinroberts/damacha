@@ -5,6 +5,8 @@
   align-items: center;
   user-select: none;
   cursor: pointer;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .root.active {
@@ -17,4 +19,19 @@
 
 button.playButton {
   margin-right: 10px;
+}
+
+.id {
+  font-size: 10px;
+  margin-right: 10px;
+}
+.date {
+  font-size: 10px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  flex: 1;
 }

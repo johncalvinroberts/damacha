@@ -18,9 +18,10 @@ const TrackDetail = async ({ params }: Props) => {
   const { dateUploaded, trackName, remark } = track;
   return (
     <div className={styles.root}>
-      <h1>
-        {trackName} <TrackPlayButton track={track} />
-      </h1>
+      <div className={styles.top}>
+        [{track.id}] <TrackPlayButton track={track} />
+      </div>
+      <h1 className={styles.title}>{trackName}</h1>
       {remark && (
         <div
           dangerouslySetInnerHTML={{ __html: remark }}

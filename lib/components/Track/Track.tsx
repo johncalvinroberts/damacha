@@ -5,6 +5,7 @@ import { Track } from '@/types/app';
 import TrackPlayButton from '../TrackPlayButton';
 import { useStore } from '@/lib/store';
 import clsx from 'clsx';
+import NiceDate from '../NiceDate';
 
 type Props = {
   track: Track;
@@ -17,7 +18,13 @@ const Track = ({ track }: Props) => {
   return (
     <li className={clsx(styles.root, { [styles.active]: isCurrentTrack })}>
       <TrackPlayButton track={track} />
-      <Link href={`/${track.slug}`}>{track.trackName}</Link>
+      <Link href={`/${track.slug}`} className={styles.link}>
+        <span className={styles.id}>[{track.id}]</span>
+        {track.trackName}
+      </Link>
+      <span className={styles.date}>
+        <NiceDate date={track.dateUploaded} />
+      </span>
     </li>
   );
 };

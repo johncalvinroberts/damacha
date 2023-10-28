@@ -9,3 +9,12 @@
 .date {
   font-style: italic;
 }
+
+.top {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  margin-bottom: 10px;
+}

@@ -12,15 +12,24 @@ import Loading from '../Loading';
 
 const Player = () => {
   const { next, previous, playPause, playing, duration, time } = useAudio();
-  const { tracks, loading, currentTrackIndex } = useStore();
+  const { tracks, loading, currentTrackIndex, wavesurfer } = useStore();
+  const mutedColor = useCssVariable('--muted');
+  const textColor = useCssVariable('--text');
   const options = {
-    // waveColor: "",
-    // progressColor: mutedColor || '',
+    waveColor: textColor,
+    progressColor: mutedColor || '',
   };
   const waveSurferContainer = useRef<HTMLDivElement>(null);
   const initialTrackUrl = tracks[currentTrackIndex].url;
   useWavesurfer(waveSurferContainer, options, initialTrackUrl);
   useKeyboard();
+  useEffect(() => {
+    console.log({ mutedColor, textColor });
+    wavesurfer?.setOptions({
+      waveColor: textColor,
+      progressColor: mutedColor || '',
+    });
+  }, [mutedColor, textColor]);
 
   return (
     <div className={styles.root}>

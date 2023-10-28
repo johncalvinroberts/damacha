@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useStore } from '../store';
 
 function getCssVariableValue(variableName: string): string | undefined {
   const isServer = typeof window === 'undefined';
@@ -11,22 +12,12 @@ function useCssVariable(variableName: string): string | undefined {
     getCssVariableValue(variableName),
   );
 
+  const { theme } = useStore();
+
   useEffect(() => {
-    const updateValue = () => {
-      const newValue = getCssVariableValue(variableName);
-      if (newValue !== value) {
-        setValue(newValue);
-      }
-    };
-
-    updateValue(); // Initial update
-
-    window.addEventListener('resize', updateValue); // Listen for changes on window resize......wtf
-
-    return () => {
-      window.removeEventListener('resize', updateValue); // Clean up the event listener
-    };
-  }, [variableName, value]);
+    const nextValue = getCssVariableValue(variableName);
+    setValue(nextValue);
+  }, [theme, variableName]);
 
   return value || '';
 }

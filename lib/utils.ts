@@ -25,3 +25,13 @@ export const hhmmss = (n: number) => {
     return '00:00';
   }
 };
+
+export const getRandomUnicodeString = (length: number): string => {
+  const array = new Uint16Array(length);
+  window.crypto.getRandomValues(array);
+  let str = '';
+  for (var i = 0; i < array.length; i++) {
+    str += String.fromCharCode(array[i]);
+  }
+  return str;
+};

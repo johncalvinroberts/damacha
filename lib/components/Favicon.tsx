@@ -1,22 +1,19 @@
 'use client';
 import { useRef, useState } from 'react';
 import { useCssVariable, useInterval, useAudio } from '@/lib/hooks';
-
-const letters = [
-  ...'✨💅✨♻️✨🦜✨🍄✨☄️✨💫✨🐱✨💆☘️☘️🍀🌿🌳🌲🐿🌲🌲🌱🍃🎋🌲🌸🌸🌼🌺🥀💐🌕🌖🌗🌘🌑🌒🌓🌔🌎🌍🌏🌔🌓🌒🌑🌘🌗🌖🌕',
-];
+import { getRandomUnicodeString } from '../utils';
 
 function useWickedFavIcon() {
-  const [index, setIndex] = useState(0);
+  const [letter, setLetter] = useState(getRandomUnicodeString(1));
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const text = useCssVariable('--text') || '';
   const background = useCssVariable('--primary') || '';
 
   useInterval(() => {
-    setIndex(index >= letters.length - 1 ? 0 : index + 1);
-    const letter = letters[index];
     const canvas = canvasRef.current;
     if (!canvas) return;
+    const letter = getRandomUnicodeString(1);
+    setLetter(letter);
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
     ctx.fillStyle = background;
@@ -29,7 +26,7 @@ function useWickedFavIcon() {
     link.type = 'image/x-icon';
     link.href = data;
   }, 1000);
-  return { letter: letters[index], index, canvasRef };
+  return { letter, canvasRef };
 }
 
 const PlayingFavicon = () => {

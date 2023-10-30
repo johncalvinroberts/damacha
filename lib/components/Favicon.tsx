@@ -1,6 +1,6 @@
 'use client';
 import { useRef, useState } from 'react';
-import { useCssVariable, useInterval } from '@/lib/hooks';
+import { useCssVariable, useInterval, useAudio } from '@/lib/hooks';
 
 const letters = [
   ...'✨💅✨♻️✨🦜✨🍄✨☄️✨💫✨🐱✨💆☘️☘️🍀🌿🌳🌲🐿🌲🌲🌱🍃🎋🌲🌸🌸🌼🌺🥀💐🌕🌖🌗🌘🌑🌒🌓🌔🌎🌍🌏🌔🌓🌒🌑🌘🌗🌖🌕',
@@ -32,7 +32,7 @@ function useWickedFavIcon() {
   return { letter: letters[index], index, canvasRef };
 }
 
-export default function FavIcon() {
+const PlayingFavicon = () => {
   const { canvasRef } = useWickedFavIcon();
   return (
     <div>
@@ -45,4 +45,9 @@ export default function FavIcon() {
       />
     </div>
   );
+};
+
+export default function FavIcon() {
+  const { playing } = useAudio();
+  return playing ? <PlayingFavicon /> : null;
 }

@@ -68,7 +68,10 @@ const useAudio = () => {
     useStore.setState({ currentTrackIndex: track.index });
     await wavesurfer?.load(track.url);
     wavesurfer?.seekTo(0);
-    wavesurfer?.play();
+    if (wavesurfer?.isPlaying()) {
+      console.log('here do');
+      wavesurfer?.play();
+    }
   };
 
   return {

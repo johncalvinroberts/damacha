@@ -6,12 +6,14 @@ import { Track } from '@/types/app';
 import styles from './TrackPlayButton.module.css';
 import { useStore } from '@/lib/store';
 import Loading from '../Loading';
+import { useEffect } from 'react';
 
 type Props = {
   track: Track;
+  eagerLoad?: boolean;
 };
 
-const TrackPlayButton = ({ track }: Props) => {
+const TrackPlayButton = ({ track, eagerLoad }: Props) => {
   const { playing, playPause, currentTrackIndex, load } = useAudio();
   const { loading } = useStore();
   const isCurrentTrack = currentTrackIndex === track.index;
@@ -22,6 +24,13 @@ const TrackPlayButton = ({ track }: Props) => {
       load(track);
     }
   };
+
+  useEffect(() => {
+    if (eagerLoad) {
+      load(track);
+    }
+  }, [eagerLoad, track]);
+
   return (
     <>
       <Button

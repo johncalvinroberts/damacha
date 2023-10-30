@@ -1,0 +1,19 @@
+.root {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.usersCount {
+  padding: 10px;
+  font-size: 10px;
+}
+
+button.chatButton {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  width: 40px;
+  height: 40px;
+  justify-content: center;
+}

@@ -5,22 +5,22 @@ import { DEFAULT_METADATA } from '@/lib/constants';
 import NiceDate from '@/lib/components/NiceDate';
 import styles from './page.module.css';
 import TrackPlayButton from '@/lib/components/TrackPlayButton';
-import Link from 'next/link';
 
 type Props = { params: { slug: string } };
 
+// this is an rsc
 const TrackDetail = async ({ params }: Props) => {
   const track = await getTrackBySlug(params.slug);
   if (!track) {
     notFound();
-    return <></>;
   }
+
   const { dateUploaded, trackName, remark } = track;
   return (
     <div className={styles.root}>
       <div className={styles.top}>
         <span>[{track.id}]</span>
-        <TrackPlayButton track={track} />
+        <TrackPlayButton track={track} eagerLoad />
       </div>
       <h1 className={styles.title}>{trackName}</h1>
       {remark && (

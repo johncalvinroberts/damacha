@@ -27,6 +27,8 @@ export const hhmmss = (n: number) => {
 };
 
 export const getRandomUnicodeString = (length: number): string => {
+  const isServer = typeof window === 'undefined';
+  if (isServer) return '';
   const array = new Uint16Array(length);
   window.crypto.getRandomValues(array);
   let str = '';

@@ -13,6 +13,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@liveblocks/client": "^1.5.2",
+    "@liveblocks/react": "^1.5.2",
     "clsx": "^2.0.0",
     "dayjs": "^1.11.10",
     "next": "14.0.0",

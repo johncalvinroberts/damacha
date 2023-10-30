@@ -3,15 +3,18 @@
   grid-template-columns: 1fr 1fr;
 }
 
-.player {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+.left {
   position: sticky;
   top: 0;
   align-self: flex-start;
   background-color: var(--primary);
   z-index: 1;
+}
+
+.player {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .footer {

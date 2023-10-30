@@ -12,6 +12,8 @@ import { getAllTracks } from '@/lib/tracks';
 import { Theme } from '@/types/app';
 import FavIcon from '@/lib/components/Favicon';
 import ThemeToggle from '@/lib/components/ThemeToggle';
+import Room from '@/lib/components/Room';
+import Comments from '@/lib/components/Comments';
 
 const roboto = Roboto_Mono({ subsets: ['latin'] });
 
@@ -32,13 +34,18 @@ export default async function RootLayout({
       <StoreInitializer preloadedState={{ tracks, theme }} />
       <body className={roboto.className}>
         <div className={styles.root}>
-          <header className={styles.player}>
-            <div className={styles.top}>
-              <Link href="/">damacha</Link>
-              <ThemeToggle className={styles.themeToggle} />
-            </div>
-            <Player />
-          </header>
+          <div className={styles.left}>
+            <header className={styles.player}>
+              <div className={styles.top}>
+                <Link href="/">damacha</Link>
+                <ThemeToggle className={styles.themeToggle} />
+              </div>
+              <Player />
+            </header>
+            <Room>
+              <Comments />
+            </Room>
+          </div>
           <main className={styles.contentColumn}>{children}</main>
           <footer className={styles.footer}>
             <span>© {new Date().getFullYear()}</span>

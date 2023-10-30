@@ -4,7 +4,7 @@ import { useCssVariable, useInterval, useAudio } from '@/lib/hooks';
 import { getRandomUnicodeString } from '../utils';
 
 function useWickedFavIcon() {
-  const [letter, setLetter] = useState(getRandomUnicodeString(1));
+  const [letter, setLetter] = useState('');
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const text = useCssVariable('--text') || '';
   const background = useCssVariable('--primary') || '';

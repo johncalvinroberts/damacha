@@ -9,7 +9,7 @@ type Props = {
 };
 
 const Loading = ({ size = 'sm' }: Props) => {
-  const [item, setItem] = useState(getRandomUnicodeString(1));
+  const [item, setItem] = useState('');
 
   useInterval(() => {
     getRandomUnicodeString(1);

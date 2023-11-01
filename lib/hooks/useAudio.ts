@@ -11,7 +11,7 @@ const useAudio = () => {
 
   const progress = time / duration || 0;
 
-  const playPause = async () => {
+  const playPause = async (forcePlay?: boolean) => {
     const track = tracks[currentTrackIndex];
     const mediaElement = wavesurfer?.getMediaElement();
     if (!mediaElement || !wavesurfer) {
@@ -22,10 +22,11 @@ const useAudio = () => {
       await wavesurfer.play();
       return;
     }
-    if (playing) {
-      wavesurfer.pause();
-    } else {
+    if (forcePlay || !playing) {
       wavesurfer.play();
+      return;
+    } else {
+      wavesurfer.pause();
     }
   };
 

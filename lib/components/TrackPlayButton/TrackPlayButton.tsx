@@ -17,16 +17,17 @@ const TrackPlayButton = ({ track, eagerLoad }: Props) => {
   const { playing, playPause, currentTrackIndex, load } = useAudio();
   const { loading } = useStore();
   const isCurrentTrack = currentTrackIndex === track.index;
-  const handleClick = () => {
+  const handleClick = async () => {
     if (isCurrentTrack) {
       playPause();
     } else {
-      load(track);
+      await load(track);
+      playPause(true);
     }
   };
 
   useEffect(() => {
-    if (eagerLoad) {
+    if (eagerLoad && !playing) {
       load(track);
     }
   }, [eagerLoad, track]);

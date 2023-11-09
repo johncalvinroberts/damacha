@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import WaveSurfer, { WaveSurferOptions } from 'wavesurfer.js';
 import { useStore } from '../store';
+import { useAudio } from '.';
 
 // Run this hook only once, no more than one component should use this hook
 const useWavesurfer = (
@@ -9,6 +10,7 @@ const useWavesurfer = (
   initialTrackUrl?: string,
 ) => {
   const { wavesurfer } = useStore();
+  const { next } = useAudio();
   const optionsRef = useRef<Partial<WaveSurferOptions>>(options || {});
   // Initialize wavesurfer when the container mounts
   // or any of the props change
@@ -41,6 +43,7 @@ const useWavesurfer = (
       wavesurfer.on('ready', (duration) =>
         useStore.setState({ duration, loading: false }),
       ),
+      wavesurfer.on('finish', () => next()),
     ];
 
     return () => {

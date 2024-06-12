@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import { Metadata } from 'next';
 
 export const DEFAULT_METADATA: Metadata = {
   title: 'damacha',
@@ -9,5 +9,5 @@ export const DEFAULT_METADATA: Metadata = {
   twitter: {
     creator: '@omg_damacha',
     card: 'summary_large_image',
-  },  
-}
+  },
+};

@@ -57,7 +57,7 @@ export default async function RootLayout({
               spotify
             </a>
             <a
-              href="https://www.instagram.com/omg_damacha/"
+              href="https://www.instagram.com/damachabeats/"
               target="_blank"
               rel="noopener noreferrer"
             >

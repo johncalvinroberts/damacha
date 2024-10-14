@@ -20,7 +20,7 @@ const generateId = (index: number): Promise<string> => {
 };
 
 (async () => {
-  const dateUploaded = dayjs(new Date()).format('yyyy-MM-dd');
+  const dateUploaded = dayjs(new Date()).format('YYYY-MM-DD');
   const response = await prompts([
     {
       type: 'text',

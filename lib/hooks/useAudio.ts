@@ -18,7 +18,7 @@ const useAudio = () => {
       throw new Error('audio element not yet defined');
     }
     if (!mediaElement.src) {
-      await wavesurfer.load(track.url);
+      await wavesurfer.load(track.cloudflareURL);
       await wavesurfer.play();
       return;
     }
@@ -42,7 +42,7 @@ const useAudio = () => {
     }
     const track = tracks[n];
     useStore.setState({ currentTrackIndex: n });
-    await wavesurfer.load(track.url);
+    await wavesurfer.load(track.cloudflareURL);
     await wavesurfer.play();
     cycleThemeBackward();
     if (pathname !== '/') {
@@ -57,7 +57,7 @@ const useAudio = () => {
     const n = (currentTrackIndex + 1) % tracks.length;
     const track = tracks[n];
     useStore.setState({ currentTrackIndex: n });
-    await wavesurfer.load(track.url);
+    await wavesurfer.load(track.cloudflareURL);
     await wavesurfer.play();
     cycleThemeForward();
     if (pathname !== '/') {
@@ -67,7 +67,7 @@ const useAudio = () => {
 
   const load = async (track: Track) => {
     useStore.setState({ currentTrackIndex: track.index });
-    await wavesurfer?.load(track.url);
+    await wavesurfer?.load(track.cloudflareURL);
     wavesurfer?.seekTo(0);
     if (wavesurfer?.isPlaying()) {
       console.log('here do');

@@ -13,11 +13,14 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.688.0",
     "@liveblocks/client": "^1.12.0",
     "@liveblocks/react": "^1.12.0",
+    "bun": "",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.11",
-    "next": "14.2.3",
+    "next": "15.0.3",
+    "p-all": "^5.0.0",
     "prompts": "^2.4.2",
     "react": "^18",
     "react-dom": "^18",

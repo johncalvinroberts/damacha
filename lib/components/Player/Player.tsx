@@ -1,6 +1,5 @@
 'use client';
 import { useEffect, useRef } from 'react';
-import ThemeToggle from '../ThemeToggle';
 import styles from './Player.module.css';
 import Button from '../Button';
 import { Previous, Pause, Play, Next } from '../icons';
@@ -20,7 +19,7 @@ const Player = () => {
     progressColor: mutedColor || '',
   };
   const waveSurferContainer = useRef<HTMLDivElement>(null);
-  const initialTrackUrl = tracks[currentTrackIndex].url;
+  const initialTrackUrl = tracks[currentTrackIndex]?.cloudflareURL;
   useWavesurfer(waveSurferContainer, options, initialTrackUrl);
   useKeyboard();
   useEffect(() => {

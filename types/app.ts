@@ -8,6 +8,7 @@ export type Track = {
   trackName: string;
   slug: string;
   url: string;
+  cloudflareURL: string;
   dateUploaded: string;
   id: string;
   remark?: string | undefined;

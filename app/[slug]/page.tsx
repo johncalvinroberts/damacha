@@ -10,7 +10,7 @@ type Props = { params: { slug: string } };
 
 // this is an rsc
 const TrackDetail = async ({ params }: Props) => {
-  const track = await getTrackBySlug(params.slug);
+  const track = await getTrackBySlug((await params).slug);
   if (!track) {
     notFound();
   }
@@ -43,7 +43,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const track = await getTrackBySlug(params.slug);
+  const track = await getTrackBySlug((await params).slug);
   return {
     ...DEFAULT_METADATA,
     description: 'A musical track by damacha with a free download',

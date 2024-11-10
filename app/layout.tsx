@@ -27,7 +27,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const tracks = await getAllTracks();
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const theme: Theme = (cookieStore.get('theme')?.value as Theme) || 'purple';
   return (
     <html lang="en" data-theme={theme}>

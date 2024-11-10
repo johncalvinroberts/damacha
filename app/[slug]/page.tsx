@@ -6,7 +6,7 @@ import NiceDate from '@/lib/components/NiceDate';
 import styles from './page.module.css';
 import TrackPlayButton from '@/lib/components/TrackPlayButton';
 
-type Props = { params: { slug: string } };
+type Props = { params: Promise<{ slug: string }> };
 
 // this is an rsc
 const TrackDetail = async ({ params }: Props) => {

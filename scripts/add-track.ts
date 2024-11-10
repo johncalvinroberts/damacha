@@ -50,10 +50,11 @@ const generateId = (index: number): Promise<string> => {
   const { trackName, url, remark } = response;
   const slug = encodeURIComponent(kebabCase(trackName));
   const id = await generateId(tracks.length);
-  const track: Omit<Track, 'index'> = {
+  const track: Omit<Track, 'index' | 'Promise<'> = {
     trackName,
     slug,
-    url,
+    url: '',
+    cloudflareURL: url,
     dateUploaded,
     id,
     remark,
